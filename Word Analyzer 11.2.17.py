@@ -6,16 +6,18 @@ import string
 
 '''
 Description:
-    1. Will count the number of words in a string, and the number of unique
-    words in a string.
+    This program has a few methods that will analyze a given text. The program will do the following:
+    
+    * Count the number of words in a text
+    * Count the number of unique words in a text
+    * Produce a dictioanry of words and the number of times each word is used (in the debugger, or trace)
+    * Will count the number of sentences in a text
+    * Will give the average number of words per sentence
 
-    2. Will count the number of sentences in a string
-
-    3. Will count the average number of words per sentence
-
-    4. Findandreplace is a method the recursively searches for a char/element,
-    then if found will replace that char/element with another designated
-    char/element.
+    The program is test driven, and works with multiple cases demonstrated below.
+    
+    note: *** NEED *** finish by having program analyze text from a .txt file on the command line
+    
                     
 Author: Zachary Stall
 Version: 2
