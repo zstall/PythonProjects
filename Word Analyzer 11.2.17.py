@@ -7,7 +7,8 @@ import string
 '''
 Description:
     This program has a few methods that will analyze a given text. The program will do the following:
-    
+
+    * Leela is the coolest
     * Count the number of words in a text
     * Count the number of unique words in a text
     * Produce a dictioanry of words and the number of times each word is used (in the debugger, or trace)
