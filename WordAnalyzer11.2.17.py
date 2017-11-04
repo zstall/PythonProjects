@@ -1,3 +1,4 @@
+#! Python3
 from __future__ import print_function
 import unittest
 import pprint
@@ -43,9 +44,10 @@ def countingwords(text):
 # method to find only unique words 
 def getuniquewords(text):
     wordsDic = {}                                           # create a dictionary to seperate out uniques words
-    msg = ''.join(ch for ch in text if ch not in exclude)   # remove all puncuation
-    msg = msg.lower()                                       # make all char lowercase
-    words = msg.split()                                     # split all words into a list
+
+    # remove puncuation, make all lowercase, and put all words into a list
+    words = ''.join(ch for ch in text if ch not in exclude).lower().split()
+    
 
     # create a loop to iterate through the list of words and create a dictionary to count unique words
     for i in words: 
@@ -184,5 +186,9 @@ class TestWordAnalyzer(unittest.TestCase):
 if '__main__' == __name__:
     unittest.main()
 
+
+
+    
+    
     
     
