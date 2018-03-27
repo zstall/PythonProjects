@@ -24,7 +24,7 @@ Author: Zachary Stall
 Version: 2
 
 '''
-# trace: if set to true will print information from funcations for debugging
+# trace: if set to true will print information from functions for debugging
 trace  = False
 # trace2: if set to true will print out results for methods given texts
 trace2 = True
