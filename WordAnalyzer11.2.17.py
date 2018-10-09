@@ -3,6 +3,10 @@ from __future__ import print_function
 import unittest
 import pprint
 import string
+import tkinter
+from tkinter import messagebox
+from tkinter import *
+
 
 
 '''
@@ -24,15 +28,18 @@ Author: Zachary Stall
 Version: 2
 
 '''
-# trace: if set to true will print information from functions for debugging
-trace  = False
-# trace2: if set to true will print out results for methods given texts
-trace2 = True
 
-# create a var with the set of punctuation char to be excluded for unique word count
+''' trace: if set to true will print information from functions for debugging '''
+trace  = False
+''' trace2: if set to true will turn on Unit Tests and print out results for Unit Tests in
+    shell. Also, will turn off user inputs and messages.'''
+trace2 = False
+
+
+''' create a var with the set of punctuation char to be excluded for unique word count '''
 exclude = set(string.punctuation)
 
-# get the total number of words from the text
+''' get the total number of words from the text '''
 def countingwords(text):
     numWords = 0                                            # var to store total
     
@@ -40,7 +47,7 @@ def countingwords(text):
     numWords = len(words)                                   # store the length of list to get total words
     return numWords                                         # return total
 
-# method to find only unique words 
+''' method to find only unique words'''
 def getuniquewords(text):
     wordsDic = {}                                           # create a dictionary to seperate out uniques words
 
@@ -60,6 +67,7 @@ def getuniquewords(text):
     return len(wordsDic)
 
 
+''' Using punctuation create a method to count the number of sentences. '''
 def countingsentences(text):
     msg = type(text)()
     a = 1   # Set length of slices
@@ -113,17 +121,16 @@ def avgwords(text):
 
 
 def results_words_analyzer(message):
-    if trace2:
-        text = " ".join(message.split())
-        print('*****************************************************************')
-        print('For the text: \n' + text)
-        print()
-        print('The number of sentences is: ' + str(countingsentences(text)))
-        print('The number of words is: ' + str(countingwords(text)))
-        print('The number of unique words is: ' + str(getuniquewords(text)))
-        print('The average words per sentence is: ' + str(avgwords(text)))
-        print('*****************************************************************')
-        print()
+    text = " ".join(message.split())
+    print('*****************************************************************')
+    print('For the text: \n' + text)
+    print()
+    print('The number of sentences is: ' + str(countingsentences(text)))
+    print('The number of words is: ' + str(countingwords(text)))
+    print('The number of unique words is: ' + str(getuniquewords(text)))
+    print('The average words per sentence is: ' + str(avgwords(text)))
+    print('*****************************************************************')
+    print()
 
 
 t   = 'Hello world.'
@@ -172,6 +179,7 @@ class TestWordAnalyzer(unittest.TestCase):
         results_words_analyzer("Why did you come here?")
         self.assertEqual(countingsentences("Are you crazy? I love you!"), 2)
         results_words_analyzer("Are you crazy? I love you!")
+        
     def test_formatingcntsent(self):
         
         self.assertEqual(countingsentences(t4), 10)
@@ -183,7 +191,41 @@ class TestWordAnalyzer(unittest.TestCase):
         results_words_analyzer(" ")
 
 if '__main__' == __name__:
-    unittest.main()
+
+    if not trace2:
+        
+        master = Tk()
+        eLabel = Label(master, text="Enter text to be analyzed:")
+        eLabel.pack(side="left")
+        
+        e = Entry(master, width = 100)
+        e.pack(side="left")
+
+        e.focus_set()
+
+        def callback():
+            text = " ".join(e.get().split())
+            sumSent = countingsentences(e.get())
+            sumWord = countingwords(e.get())
+            unqWord = getuniquewords(e.get())
+            avgWord = avgwords(e.get())
+
+            m = messagebox.showinfo("Analysis",
+                                    "For text: " +text + "\n\n" +
+                                    "Number of sentences: " + str(sumSent) + "\n" +
+                                    "Number of words is: " + str(sumWord) + "\n" +
+                                    "Number of unique words: " + str(unqWord) + "\n" +
+                                    "Average words per sentence: " + str(avgWord) + "\n")
+            
+            results_words_analyzer(e.get())
+
+        b = Button(master, text="Enter", width = 10, command = callback)
+        b.pack(side="right")
+
+
+        mainloop()
+    if trace2:
+        unittest.main()
 
 
 
