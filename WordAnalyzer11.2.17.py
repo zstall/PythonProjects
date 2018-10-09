@@ -195,9 +195,11 @@ if '__main__' == __name__:
     if not trace2:
         
         master = Tk()
+        master.geometry('800x800')
         eLabel = Label(master, text="Enter text to be analyzed:")
-        eLabel.pack(side="left")
-        
+        eLabel.pack()
+
+
         e = Entry(master, width = 100)
         e.pack(side="left")
 
