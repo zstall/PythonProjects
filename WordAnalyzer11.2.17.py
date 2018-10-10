@@ -76,6 +76,7 @@ def countingsentences(text):
     per = '.'
     exc = '!'
     que = '?'
+    ell = '...'
     # create a list and dictionary to store sentences
     senList = []
     senDic  = {}
@@ -131,6 +132,22 @@ def results_words_analyzer(message):
     print('The average words per sentence is: ' + str(avgwords(text)))
     print('*****************************************************************')
     print()
+
+def callback():
+    text = " ".join(e.get().split())
+    sumSent = countingsentences(e.get())
+    sumWord = countingwords(e.get())
+    unqWord = getuniquewords(e.get())
+    avgWord = avgwords(e.get())
+
+    m = messagebox.showinfo("Analysis",
+                            "For text: " +text + "\n\n" +
+                            "Number of sentences: " + str(sumSent) + "\n" +
+                            "Number of words is: " + str(sumWord) + "\n" +
+                            "Number of unique words: " + str(unqWord) + "\n" +
+                            "Average words per sentence: " + str(avgWord) + "\n")
+           
+    results_words_analyzer(e.get())
 
 
 t   = 'Hello world.'
@@ -195,36 +212,23 @@ if '__main__' == __name__:
     if not trace2:
         
         master = Tk()
-        master.geometry('800x800')
+        master.geometry('400x400')
         eLabel = Label(master, text="Enter text to be analyzed:")
         eLabel.pack()
 
 
-        e = Entry(master, width = 100)
+        e = Entry(master, width = 50)
         e.pack(side="left")
 
         e.focus_set()
 
-        def callback():
-            text = " ".join(e.get().split())
-            sumSent = countingsentences(e.get())
-            sumWord = countingwords(e.get())
-            unqWord = getuniquewords(e.get())
-            avgWord = avgwords(e.get())
-
-            m = messagebox.showinfo("Analysis",
-                                    "For text: " +text + "\n\n" +
-                                    "Number of sentences: " + str(sumSent) + "\n" +
-                                    "Number of words is: " + str(sumWord) + "\n" +
-                                    "Number of unique words: " + str(unqWord) + "\n" +
-                                    "Average words per sentence: " + str(avgWord) + "\n")
-            
-            results_words_analyzer(e.get())
+       
 
         b = Button(master, text="Enter", width = 10, command = callback)
         b.pack(side="right")
+        
 
-
+        
         mainloop()
     if trace2:
         unittest.main()
